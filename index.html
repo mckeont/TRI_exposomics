@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Toxic Release Inventory Hazard Index Viewer for Lung Carcinogen Exposure</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="css/stylem.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.3.2/dist/esri-leaflet.js"
+  integrity="sha512-6LVib9wGnqVKIClCduEwsCub7iauLXpwrd5njR2J507m3A2a4HXJDLMiSZzjcksag3UluIfuW1KzuWVI5n/cuQ=="
+  crossorigin=""></script>
+  <style>
+
+    html { height:100%;}
+
+.legend {
+    line-height: 18px;
+    color: #333333;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    padding: 6px 8px;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.legend i {
+    width: 28px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.legend p {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+}
+
+
+  </style>
+</head>
+<body>
+    <script src="js/philly1987_1997.js"></script>
+    <script src="js/philly1987_2007.js"></script>
+    <script src="js/philly1987_2017.js"></script>
+    <script src="js/philly1998_2002.js"></script>
+    <script src="js/philly2003_2008.js"></script>
+    <script src="js/philly2009_2012.js"></script>
+    <script src="js/philly2013_2017.js"></script>
+
+    <script src="js/acc1987_2007.js"></script>
+    <script src="js/acc1987_2017.js"></script>
+    <script src="js/acc1998_2002.js"></script>
+    <script src="js/acc2003_2008.js"></script>
+    <script src="js/acc2009_2012.js"></script>
+    <script src="js/acc2013_2017.js"></script>
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+       <!-- Modal -->
+
+       <div class ="sidebar container-fluid">
+        <div><h5>TRI Exposomics <br>Explorer</h5></div>
+        <div><h6>By <br>Tom McKeon</h^></div>
+      <div class = "row">
+
+        <center>
+        <!-- <span class= "col-sm-6" style="left -40px"><input id="dest" type="text" size="12" placeholder= " enter an address"></span>
+        <span class= "col-sm-6"><button id="calculate" class= "btn-primary">Go!</button></span> -->
+        <span class = "col-sm-6">
+        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">More Info</button>
+        </span>
+      </center>
+      </div>
+  </div>
+    <div id="myModal" class="modal fade modal-dialog modal-md modalbox container-fluid" role="dialog">
+      <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title text-center"><b>Welcome to the Exposomics Explorer App!<b></h4>
+           </div>
+           <div class="modal-body text-center well">
+             <p style="margin-left:20px "> Explore Lung Cancer Risk By Zipcode for the Abramson Cancer Center Catchment Area and Philadelphia <br>
+                 This app was developed using the US-EPA's Toxic Release Inventory from 1987 to 2017 and US-EPA's Risk Assessment Model</p>
+           </div>
+           <div class="modal-body text-center well" style="background-color: tomato">
+             <p style="padding-left:25px">
+                <div><center><h2 class="h3">From <span style="color:blue">Prevention</span> to <span style="color:red">Care</span></h2></center></div>
+              </p></h6>
+           </div>
+           <div class= "modal-body well">
+             <a href = 'https://www.epa.gov/toxics-release-inventory-tri-program' ><button class="button1"> More About TRI</button><a>
+             <a href = 'https://www.pennmedicine.org/cancer/cancer-research'><button class="button1"> More About ACC</button><a>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+       </div>
+     </div>
+    
+  <div id="map" class="map"></div>
+    <!-- Sidebar -->
+
+
+<script>
+
+  var gray = L.layerGroup();
+
+  // more than one service can be grouped together and passed to the control together
+  L.esri.basemapLayer('DarkGray').addTo(gray);
+  L.esri.basemapLayer('GrayLabels').addTo(gray);
+
+ function setColorFunc(density){
+    return density > 14 ? '#550000 ' :
+           density > 10 ? '#870000 ' :
+           density > 8 ? '#b90000 ' :
+           density > 5 ? '#e10000 ' :
+           density > 3 ? '#FF1400 ' :
+           density > 1 ? '#FF4600 ' :
+           density > 0.5? ' #FF6e00 ' :
+           density > 0.3? '#FF8c00 ' :
+           density > 0.1? '#FFc800 ' :
+           density > 0? '#FFfa00 ' :
+                         '#DCDCDC ';
+};
+
+        function styleFunc(feature) {
+    return {
+        fillColor: setColorFunc(feature.properties.total_tox_),
+        fillOpacity: 0.9,
+        weight: 1,
+        opacity: 1,
+        color: '#ffffff',
+        dashArray: '3',
+        zIndexOffset: -500
+    };
+}
+
+//Add Geojson layers here
+    var philly1987_1997 = L.geoJson(philly1987_1997, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var philly1987_2007 = L.geoJson(philly1987_2007, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var philly1987_2017 = L.geoJson(philly1987_2017, { 
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+      var philly1998_2002 = L.geoJson(philly1998_2002, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var acc1987_2007 = L.geoJson(acc1987_2007, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var acc1987_2017 = L.geoJson(acc1987_2017, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var acc1998_2002 = L.geoJson(acc1998_2002, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var acc2003_2008 = L.geoJson(acc2003_2008, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+    var philly2003_2008 = L.geoJson(philly2003_2008, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+      var acc2009_2012 = L.geoJson(acc2009_2012, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+      var philly2009_2012 = L.geoJson(philly2009_2012, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+      var philly2013_2017 = L.geoJson(philly2013_2017, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+      var acc2013_2017 = L.geoJson(acc2013_2017, {
+        style: styleFunc,
+        onEachFeature: function(feature, layer){
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomFeature
+            });
+            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>" 
+                + 'Hazard Index: ' +feature.properties.total_tox_ + "<br>" 
+                + 'Chemicals Present: ' +feature.properties.tally_chem);
+        }
+    }).bringToBack();
+
+
+  var map = L.map('map', {
+    center: [39.981192, -75.155389],
+    zoom: 8,
+    layers: [gray, philly1987_2007, philly1987_1997, acc1987_2007, acc1987_2017, philly1987_2017, acc1998_2002, philly1998_2002, acc2003_2008, philly2003_2008, acc2009_2012, philly2009_2012, philly2013_2017, acc2013_2017 ]
+  });
+
+  var overlays = {
+    Grayscale: gray,
+    Streetmap: L.esri.basemapLayer('Streets')
+  };
+
+  var baseLayers = {
+   
+    'Philadelphia 1987 to 1997': philly1987_1997,
+    'Philadelphia 1987 to 2007': philly1987_2007,
+    'Philadelphia 1987 to 2017': philly1987_2017,
+    'Philadelphia 1998 to 2002' : philly1998_2002,
+    'Philadelphia 2003 to 2008': philly2003_2008,
+    'Philadelphia 2009 to 2012' : philly2009_2012,
+    'Philadelphia 2013 to 2017' : philly2013_2017,
+     'ACC 1987 to 2007' : acc1987_2007,
+    'ACC 1987 to 2017' : acc1987_2017,
+    'ACC 1998 to 2002' : acc1998_2002,
+    'ACC 2003 to 2008' : acc2003_2008,
+    'ACC 2009 to 2012' : acc2009_2012,
+    'ACC 2013 to 2017' : acc2013_2017
+   
+  };
+
+  L.control.layers(baseLayers, overlays).addTo(map);
+
+  function resetHighlight(e) {
+    philly1987_1997 .resetStyle(e.target).bringToBack();
+} 
+
+ function resetHighlight(e) {
+    philly1987_2007 .resetStyle(e.target).bringToBack();
+}  
+
+function resetHighlight(e) {
+    acc1987_2007 .resetStyle(e.target).bringToBack();
+} 
+
+function resetHighlight(e) {
+    acc1987_2017 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    philly1987_2017 .resetStyle(e.target).bringToBack();
+} 
+
+function resetHighlight(e) {
+    acc1998_2002 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    philly1998_2002 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    acc2003_2008 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    philly2003_2008 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    acc2009_2012 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    philly2009_2012 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    acc2013_2017 .resetStyle(e.target).bringToBack();
+}
+
+function resetHighlight(e) {
+    philly2013_2017 .resetStyle(e.target).bringToBack();
+}
+
+
+
+
+function zoomFeature(e){
+    console.log(e.target.getBounds());
+    map.fitBounds(e.target.getBounds().pad(1.5));
+}
+
+
+function highlightFeature(e){
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#696',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    // for different web browsers
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+// Add Scale Bar to Map
+L.control.scale({position: 'topleft'}).addTo(map);
+// Create Leaflet Control Object for Legend
+var legend = L.control({position: 'topright'}).bringToFront;
+
+legend.onAdd = function (map) {
+    // Create Div Element and Populate it with HTML
+    var div = L.DomUtil.create('div', 'legend');            
+    div.innerHTML += '<b>Hazard Score by Zipcode</b><br />';
+    div.innerHTML += 'by CEET Tom<br />';
+    div.innerHTML += '<br>';
+    div.innerHTML += '<i style="background: #550000"></i><p>14+</p>';
+    div.innerHTML += '<i style="background: #870000 "></i><p>10-14</p>';
+    div.innerHTML += '<i style="background: #b90000"></i><p>8-10</p>';
+    div.innerHTML += '<i style="background: #e10000"></i><p>5-8</p>';
+    div.innerHTML += '<i style="background: #FF1400"></i><p>3-5</p>';
+    div.innerHTML += '<i style="background: #FF4600"></i><p>1-3</p>';
+    div.innerHTML += '<i style="background: #FF6e00"></i><p>0.5-1</p>';
+    div.innerHTML += '<i style="background: #FF8c00"></i><p>0.3-0.5</p>';
+    div.innerHTML += '<i style="background: #FFc800"></i><p>0.1-0.3</p>';
+    div.innerHTML += '<i style="background: #FFfa00 "></i><p>0-0.1</p>';
+    div.innerHTML += '<hr>';
+    div.innerHTML += '<i style="background: #DCDCDC"></i><p>No Lung Carcinogens</p>';
+
+    return div;
+};
+</script>
+
+</body>
+</html>
