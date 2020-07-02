@@ -182,7 +182,7 @@ body {
 }
 }
 @media screen  (max-width: 479px) {
-  p {
+  i {
       left: -40px;
       top: 100px;
       position: relative;

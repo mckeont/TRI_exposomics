@@ -426,13 +426,12 @@ function highlightFeature(e){
 // Add Scale Bar to Map
 L.control.scale({position: 'topleft'}).addTo(map);
 // Create Leaflet Control Object for Legend
-var legend = L.control({position: 'topright'}).bringToFront;
+var legend = L.control({position: 'bottomleft'}).bringToFront;
 
 legend.onAdd = function (map) {
     // Create Div Element and Populate it with HTML
     var div = L.DomUtil.create('div', 'legend');
     div.innerHTML += '<b>Hazard Score by ZIP code</b><br />';
-    div.innerHTML += 'by CEET Tom<br />';
     div.innerHTML += '<br>';
     div.innerHTML += '<i style="background: #550000"></i><p>14+</p>';
     div.innerHTML += '<i style="background: #870000 "></i><p>10-14</p>';
@@ -449,6 +448,13 @@ legend.onAdd = function (map) {
 
     return div;
 };
+
+
+
+
+
+
+
 </script>
 
 </body>
