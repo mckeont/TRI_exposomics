@@ -21,13 +21,13 @@ body {
 }
 
 .button1 {
-  width: 90px;
-  height: 70px;
+  width: 100px;
+  height: 80px;
   margin-bottom: 10px;
   margin-left: 100px;
   border: solid;
   border-color: black;
-  border-width: 2px;
+  border-width: 3px;
   border-radius: 10%;
 }
 .head{
@@ -81,7 +81,7 @@ body {
   position: absolute;
   left: 0px;
   height: 100%;
-  width: 50px;
+  width: 80px;
   top: 0px;
   bottom: 0;
   padding: 20px;
@@ -125,7 +125,7 @@ body {
     width:10px;
     height:7px;
     }
-    .sidebar { 
+    .sidebar {
       position: absolute;
       height: 620px;
       width: 230px;
