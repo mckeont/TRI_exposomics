@@ -161,7 +161,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -175,7 +175,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -189,7 +189,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -203,7 +203,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -217,7 +217,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -231,7 +231,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -245,7 +245,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -259,7 +259,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -273,7 +273,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -287,7 +287,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -301,7 +301,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -315,7 +315,7 @@
                 mouseout: resetHighlight,
                 click: zoomFeature
             });
-            layer.bindPopup('zipcode: '+feature.properties.ZCTA5CE10 + "<br>"
+            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
                 + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
                 + 'Chemicals Present: ' +feature.properties.tally_chem);
         }
@@ -340,7 +340,7 @@
     'Philadelphia 2003 to 2008': philly2003_2008,
     'Philadelphia 2009 to 2012' : philly2009_2012,
     'Philadelphia 2013 to 2017' : philly2013_2017,
-     'ACC 1987 to 2007' : acc1987_2007,
+    'ACC 1987 to 2007' : acc1987_2007,
     'ACC 1987 to 2017' : acc1987_2017,
     'ACC 1998 to 2002' : acc1998_2002,
     'ACC 2003 to 2008' : acc2003_2008,
@@ -350,6 +350,7 @@
   };
 
   L.control.layers(baseLayers, overlays).addTo(map);
+
 
  function resetHighlight(e) {
     philly1987_2007 .resetStyle(e.target).bringToBack();
@@ -431,7 +432,7 @@ var legend = L.control({position: 'topright'}).bringToFront;
 legend.onAdd = function (map) {
     // Create Div Element and Populate it with HTML
     var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML += '<b>Hazard Score by Zipcode</b><br />';
+    div.innerHTML += '<b>Hazard Score by ZIP code</b><br />';
     div.innerHTML += 'by CEET Tom<br />';
     div.innerHTML += '<br>';
     div.innerHTML += '<i style="background: #550000"></i><p>14+</p>';
