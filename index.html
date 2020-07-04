@@ -23,7 +23,7 @@
   <style>
 
     html { height:100%;}
-    
+
   </style>
 </head>
 <body>
@@ -98,17 +98,16 @@
   L.esri.basemapLayer('DarkGray').addTo(gray);
   L.esri.basemapLayer('GrayLabels').addTo(gray);
 
- function setColorFunc(density){
-    return density > 14 ? '#550000 ' :
-           density > 10 ? '#870000 ' :
-           density > 8 ? '#b90000 ' :
-           density > 5 ? '#e10000 ' :
-           density > 3 ? '#FF1400 ' :
-           density > 1 ? '#FF4600 ' :
-           density > 0.5? ' #FF6e00 ' :
-           density > 0.3? '#FF8c00 ' :
-           density > 0.1? '#FFc800 ' :
-           density > 0? '#FFfa00 ' :
+ function setColorFunc(d){
+    return d > 16 ? '#800026' :
+           d > 10 ? '#BD0026' :
+           d > 8  ? '#E31A1C' :
+           d > 5  ? '#FC4E2A' :
+           d > 3  ? '#FD8D3C' :
+           d > 1  ? '#FEB24C' :
+           d > 0.5 ? '#FED976':
+           d > 0.3 ? '#FFEDA0' :
+           d > 0.1 ? '#fff7d3' :
                          '#DCDCDC ';
 };
 
@@ -126,19 +125,19 @@
 
 //Add Geojson layers here
 
-    var philly1987_2007 = L.geoJson(philly1987_2007, {
-        style: styleFunc,
-        onEachFeature: function(feature, layer){
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomFeature
-            });
-            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
-                + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
-                + 'Chemicals Present: ' +feature.properties.tally_chem);
-        }
-    }).bringToBack();
+    // var philly1987_2007 = L.geoJson(philly1987_2007, {
+    //     style: styleFunc,
+    //     onEachFeature: function(feature, layer){
+    //         layer.on({
+    //             mouseover: highlightFeature,
+    //             mouseout: resetHighlight,
+    //             click: zoomFeature
+    //         });
+    //         layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
+    //             + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
+    //             + 'Chemicals Present: ' +feature.properties.tally_chem);
+    //     }
+    // }).bringToBack();
 
     var philly1987_2017 = L.geoJson(philly1987_2017, {
         style: styleFunc,
@@ -168,19 +167,19 @@
         }
     }).bringToBack();
 
-    var acc1987_2007 = L.geoJson(acc1987_2007, {
-        style: styleFunc,
-        onEachFeature: function(feature, layer){
-            layer.on({
-                mouseover: highlightFeature,
-                mouseout: resetHighlight,
-                click: zoomFeature
-            });
-            layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
-                + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
-                + 'Chemicals Present: ' +feature.properties.tally_chem);
-        }
-    }).bringToBack();
+    // var acc1987_2007 = L.geoJson(acc1987_2007, {
+    //     style: styleFunc,
+    //     onEachFeature: function(feature, layer){
+    //         layer.on({
+    //             mouseover: highlightFeature,
+    //             mouseout: resetHighlight,
+    //             click: zoomFeature
+    //         });
+    //         layer.bindPopup('ZIP code: '+feature.properties.ZCTA5CE10 + "<br>"
+    //             + 'Hazard Index: ' +feature.properties.total_tox + "<br>"
+    //             + 'Chemicals Present: ' +feature.properties.tally_chem);
+    //     }
+    // }).bringToBack();
 
     var acc1987_2017 = L.geoJson(acc1987_2017, {
         style: styleFunc,
@@ -298,7 +297,7 @@
   var map = L.map('map', {
     center: [39.981192, -75.155389],
     zoom: 8,
-    layers: [gray, philly1987_2007, acc1987_2007, acc1987_2017, philly1987_2017, acc1998_2002, philly1998_2002, acc2003_2008, philly2003_2008, acc2009_2012, philly2009_2012, philly2013_2017, acc2013_2017 ]
+    layers: [gray, acc1987_2017, philly1987_2017, acc1998_2002, philly1998_2002, acc2003_2008, philly2003_2008, acc2009_2012, philly2009_2012, philly2013_2017, acc2013_2017 ]
   });
 
   var overlays = {
@@ -307,13 +306,11 @@
   };
 
   var baseLayers = {
-    'Philadelphia 1987 to 2007': philly1987_2007,
     'Philadelphia 1987 to 2017': philly1987_2017,
     'Philadelphia 1998 to 2002' : philly1998_2002,
     'Philadelphia 2003 to 2008': philly2003_2008,
     'Philadelphia 2009 to 2012' : philly2009_2012,
     'Philadelphia 2013 to 2017' : philly2013_2017,
-    'ACC 1987 to 2007' : acc1987_2007,
     'ACC 1987 to 2017' : acc1987_2017,
     'ACC 1998 to 2002' : acc1998_2002,
     'ACC 2003 to 2008' : acc2003_2008,
@@ -322,16 +319,10 @@
 
   };
 
+  var lg = L.layerGroup([acc1987_2017, philly1987_2017, acc1998_2002, philly1998_2002, acc2003_2008, philly2003_2008, acc2009_2012, philly2009_2012, philly2013_2017, acc2013_2017])
+
   L.control.layers(baseLayers, overlays).addTo(map);
 
-
- function resetHighlight(e) {
-    philly1987_2007 .resetStyle(e.target).bringToBack();
-}
-
-function resetHighlight(e) {
-    acc1987_2007 .resetStyle(e.target).bringToBack();
-}
 
 function resetHighlight(e) {
     acc1987_2017 .resetStyle(e.target).bringToBack();
@@ -399,6 +390,28 @@ function highlightFeature(e){
 
 // Add Scale Bar to Map
 L.control.scale({position: 'topleft'}).addTo(map);
+
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 0.1, 0.3, 0.5, 1, 3, 5,  8, 10, 16],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + setColorFunc(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
+
 
 
 </script>
